@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from database import engine, Base
-from routers import remittance
+from routers import remittance, predict
 
 Base.metadata.create_all(bind=engine)
 
@@ -15,6 +15,7 @@ app.add_middleware(
 )
 
 app.include_router(remittance.router)
+app.include_router(predict.router)
 
 @app.get("/health")
 def health():
